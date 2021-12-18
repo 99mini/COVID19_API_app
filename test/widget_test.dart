@@ -48,15 +48,15 @@ void main() {
 </response>''';
 
   test('코로나 전체 통계', (){
-    final document = XmlDocument.parse(bookshelfXml);
-    final items = document.findAllElements('item');
-    var covid19Statics = <Covid19StatisticsModel>[];
-    items.forEach((node){
-      covid19Statics.add(Covid19StatisticsModel.fromXml(node));
-    });
-      covid19Statics.forEach((element) {
-      print('${element.stateDt} : ${element.decideCnt}');
-    });
+    // final document = XmlDocument.parse(bookshelfXml);
+    // final items = document.findAllElements('item');
+    // var covid19Statics = <Covid19StatisticsModel>[];
+    // items.forEach((node){
+    //   covid19Statics.add(Covid19StatisticsModel.fromXml(node));
+    // });
+    //   covid19Statics.forEach((element) {
+    //   print('${element.stateDt} : ${element.decideCnt}');
+    // });
   });
 
 
