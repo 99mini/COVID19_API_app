@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_api_app/src/canvas/arrow_clip_path.dart';
 import 'package:public_api_app/src/components/covid_statistics_viewer.dart';
+import 'package:public_api_app/src/components/vaccine_statistics_viewer.dart';
 import 'package:public_api_app/src/constant/color_constant.dart';
 import 'package:public_api_app/src/components/covid_bar_chart.dart';
 import 'package:public_api_app/src/controllers/covid_statistics_controller.dart';
@@ -165,6 +166,92 @@ class App extends GetView<CovidStatisticsController> {
     );
   }
 
+  Widget _reservationVaccine() {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: ColorConstant.primaryBlueColor,
+        borderRadius: BorderRadius.circular(40),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/images/covid-vaccine-icon.png",
+            width: 20,
+            color: Colors.white,
+          ),
+          const SizedBox(width: 10),
+          const Text(
+            "잔여백신, 카톡으로 실시간 예약하기",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _vaccineCurrentSituation() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          "백신 누적접종 현황",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 20),
+        Obx(
+          () => Row(
+            children: [
+              Expanded(
+                child: VaccineStatisticsViewer(
+                  title: "1차 접종",
+                  addedCount: controller.vaccineData[0].firstCnt ?? 0,
+                  totalCount: controller.vaccineData[2].firstCnt ?? 0,
+                  dense: true,
+                ),
+              ),
+              const SizedBox(
+                height: 60,
+                child: VerticalDivider(
+                  color: ColorConstant.lightGeryColor,
+                ),
+              ),
+              Expanded(
+                child: VaccineStatisticsViewer(
+                  title: "접종 완료",
+                  addedCount: controller.vaccineData[0].secondCnt ?? 0,
+                  totalCount: controller.vaccineData[2].secondCnt ?? 0,
+                  dense: true,
+                ),
+              ),
+              const SizedBox(
+                height: 60,
+                child: VerticalDivider(
+                  color: ColorConstant.lightGeryColor,
+                ),
+              ),
+              Expanded(
+                child: VaccineStatisticsViewer(
+                  title: "추가접종",
+                  addedCount: controller.vaccineData[0].thirdCnt ?? 0,
+                  totalCount: controller.vaccineData[2].thirdCnt ?? 0,
+                  subValueColor: Colors.black,
+                  dense: true,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     headerTopZone = Get.mediaQuery.padding.top + AppBar().preferredSize.height;
@@ -213,6 +300,10 @@ class App extends GetView<CovidStatisticsController> {
                     _todayStatistics(),
                     const SizedBox(height: 20),
                     _covidTrendsChart(),
+                    const SizedBox(height: 20),
+                    _reservationVaccine(),
+                    const SizedBox(height: 20),
+                    _vaccineCurrentSituation(),
                   ],
                 ),
               ),

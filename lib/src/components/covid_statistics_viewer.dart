@@ -6,7 +6,6 @@ import 'package:public_api_app/src/utils/data_utils.dart';
 class CovidStatisticsViewer extends StatelessWidget {
   final String title;
   final double addedCount;
-  final String rate;
   final ArrowDirection upDown;
   final double totalCount;
   final bool dense;
@@ -20,7 +19,6 @@ class CovidStatisticsViewer extends StatelessWidget {
     required this.addedCount,
     required this.upDown,
     required this.totalCount,
-    this.rate = "0%",
     this.dense = false,
     this.titleColor = ColorConstant.primaryGreyColor,
     this.subValueColor = Colors.black,
@@ -59,12 +57,14 @@ class CovidStatisticsViewer extends StatelessWidget {
                   ? ClipPath(
                       clipper: ArrowClipPath(direction: upDown),
                       child: Container(
-                        padding: EdgeInsets.only(left: spacing),
                         width: dense ? 10 : 20,
                         height: dense ? 10 : 20,
                         color: color,
                       ),
                     )
+                  : Container(),
+              upDown != ArrowDirection.NONE
+                  ? SizedBox(width: spacing)
                   : Container(),
               Text(
                 upDown != ArrowDirection.NONE
