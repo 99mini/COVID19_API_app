@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Covid Statistics',
+      debugShowCheckedModeBanner: false,
       initialBinding: BindingsBuilder(() {
         Get.put(CovidStatisticsController());
       }),
