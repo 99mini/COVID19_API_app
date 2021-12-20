@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:public_api_app/src/models/covid_statistics.dart';
+import 'package:public_api_app/src/models/covid_vaccine_statistics.dart';
 import 'package:xml/xml.dart';
 
 class CovidStatisticsRepository {
   late var _dio;
+
   CovidStatisticsRepository() {
     _dio = Dio(
       BaseOptions(baseUrl: "http://openapi.data.go.kr", queryParameters: {
@@ -11,6 +13,23 @@ class CovidStatisticsRepository {
             "SybIVL6/ZSkWIHbjbD1bmCvXuPFY5a7g52aSX8I07ofzCkU4VNmIeZGLNcB3UnReXfKifrt6OxXOE2l73SrUPg=="
       }),
     );
+  }
+
+  Future<List<CovidVaccineStatisticsModel>>
+      fetchCovidVaccineStatistics() async {
+    var response =
+        await Dio().get("https://nip.kdca.go.kr/irgd/cov19stats.do?list=all");
+    final document = XmlDocument.parse(response.data);
+    final results = document.findAllElements('item');
+
+    if (results.isNotEmpty) {
+      return results
+          .map<CovidVaccineStatisticsModel>(
+              (element) => CovidVaccineStatisticsModel.fromXml(element))
+          .toList();
+    } else {
+      return Future.value(null);
+    }
   }
 
   Future<List<Covid19StatisticsModel>> fetchCovidStatistics(

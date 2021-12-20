@@ -8,4 +8,9 @@ class DataUtils {
   static String simpleDateFormat(DateTime time) {
     return DateFormat("MM.dd").format(time);
   }
+
+  static String percentFormat(double value) {
+    value *= 100;
+    return "${NumberFormat("###.0#").format(value)}%";
+  }
 }

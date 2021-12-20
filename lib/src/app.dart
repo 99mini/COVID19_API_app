@@ -122,6 +122,21 @@ class App extends GetView<CovidStatisticsController> {
               dense: true,
             ),
           ),
+          const SizedBox(
+            height: 60,
+            child: VerticalDivider(
+              color: ColorConstant.lightGeryColor,
+            ),
+          ),
+          Expanded(
+            child: CovidStatisticsViewer(
+              title: "접종완료",
+              addedCount: controller.vaccineData[2].secondCnt ?? 0,
+              totalCount: controller.vaccineData[2].secondCnt ?? 0,
+              upDown: ArrowDirection.NONE,
+              dense: true,
+            ),
+          ),
         ],
       ),
     );

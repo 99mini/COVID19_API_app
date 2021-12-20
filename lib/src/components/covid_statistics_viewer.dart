@@ -6,6 +6,7 @@ import 'package:public_api_app/src/utils/data_utils.dart';
 class CovidStatisticsViewer extends StatelessWidget {
   final String title;
   final double addedCount;
+  final String rate;
   final ArrowDirection upDown;
   final double totalCount;
   final bool dense;
@@ -19,6 +20,7 @@ class CovidStatisticsViewer extends StatelessWidget {
     required this.addedCount,
     required this.upDown,
     required this.totalCount,
+    this.rate = "0%",
     this.dense = false,
     this.titleColor = ColorConstant.primaryGreyColor,
     this.subValueColor = Colors.black,
@@ -33,11 +35,12 @@ class CovidStatisticsViewer extends StatelessWidget {
         color = ColorConstant.primaryRedColor;
         break;
       case ArrowDirection.MIDDLE:
-        // TODO: Handle this case.
         break;
       case ArrowDirection.DOWN:
         color = ColorConstant.primaryBlueColor;
-        // TODO: Handle this case.
+        break;
+      case ArrowDirection.NONE:
+        color = ColorConstant.primaryBlueColor;
         break;
     }
 
@@ -52,17 +55,21 @@ class CovidStatisticsViewer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ClipPath(
-                clipper: ArrowClipPath(direction: upDown),
-                child: Container(
-                  width: dense ? 10 : 20,
-                  height: dense ? 10 : 20,
-                  color: color,
-                ),
-              ),
-              SizedBox(width: spacing),
+              upDown != ArrowDirection.NONE
+                  ? ClipPath(
+                      clipper: ArrowClipPath(direction: upDown),
+                      child: Container(
+                        padding: EdgeInsets.only(left: spacing),
+                        width: dense ? 10 : 20,
+                        height: dense ? 10 : 20,
+                        color: color,
+                      ),
+                    )
+                  : Container(),
               Text(
-                DataUtils.numberFormat(addedCount),
+                upDown != ArrowDirection.NONE
+                    ? DataUtils.numberFormat(addedCount)
+                    : DataUtils.percentFormat(addedCount / 50000000),
                 style: TextStyle(
                     color: color,
                     fontSize: dense ? 25 : 50,

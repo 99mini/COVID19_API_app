@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-enum ArrowDirection { UP, MIDDLE, DOWN }
+enum ArrowDirection { UP, MIDDLE, DOWN, NONE }
 
 class ArrowClipPath extends CustomClipper<Path> {
   ArrowDirection direction;
@@ -25,6 +25,8 @@ class ArrowClipPath extends CustomClipper<Path> {
         path.moveTo(0, 0);
         path.lineTo(size.width, 0);
         path.lineTo(size.width * 0.5, size.height);
+        break;
+      case ArrowDirection.NONE:
         break;
     }
 
