@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:public_api_app/src/constant/color_constant.dart';
 import 'package:public_api_app/src/models/covid_statistics.dart';
 import 'package:public_api_app/src/utils/data_utils.dart';
 
@@ -31,7 +32,7 @@ class CovidBarChart extends StatelessWidget {
             ) {
               return BarTooltipItem(
                 rod.y.round().toString(),
-                TextStyle(
+                const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
@@ -63,8 +64,8 @@ class CovidBarChart extends StatelessWidget {
             x: x++,
             barRods: [
               BarChartRodData(y: covidData.calcDecideCnt, colors: [
-                Color(0xff882a2a),
-                Color(0xffda5959),
+                ColorConstant.primaryDeepRedColor,
+                ColorConstant.primaryRedColor,
               ])
             ],
             showingTooltipIndicators: [0],

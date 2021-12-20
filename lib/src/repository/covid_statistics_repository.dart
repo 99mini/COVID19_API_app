@@ -26,7 +26,6 @@ class CovidStatisticsRepository {
         "/openapi/service/rest/Covid19/getCovid19InfStateJson",
         queryParameters: query);
     final document = XmlDocument.parse(response.data);
-    // final document = XmlDocument.parse(bookshelfXml);
     final results = document.findAllElements('item');
 
     if (results.isNotEmpty) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:public_api_app/src/canvas/arrow_clip_path.dart';
+import 'package:public_api_app/src/constant/color_constant.dart';
 import 'package:public_api_app/src/utils/data_utils.dart';
 
 class CovidStatisticsViewer extends StatelessWidget {
@@ -19,7 +20,7 @@ class CovidStatisticsViewer extends StatelessWidget {
     required this.upDown,
     required this.totalCount,
     this.dense = false,
-    this.titleColor = const Color(0xff4c4e5d),
+    this.titleColor = ColorConstant.primaryGreyColor,
     this.subValueColor = Colors.black,
     this.spacing = 10,
   }) : super(key: key);
@@ -29,13 +30,13 @@ class CovidStatisticsViewer extends StatelessWidget {
     var color = Colors.black;
     switch (upDown) {
       case ArrowDirection.UP:
-        color = Color(0xffda5959);
+        color = ColorConstant.primaryRedColor;
         break;
       case ArrowDirection.MIDDLE:
         // TODO: Handle this case.
         break;
       case ArrowDirection.DOWN:
-        color = Color(0xff597eda);
+        color = ColorConstant.primaryBlueColor;
         // TODO: Handle this case.
         break;
     }

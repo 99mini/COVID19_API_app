@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:public_api_app/src/canvas/arrow_clip_path.dart';
 import 'package:public_api_app/src/components/covid_statistics_viewer.dart';
-import 'package:public_api_app/src/controllers/covid_bar_chart.dart';
+import 'package:public_api_app/src/constant/color_constant.dart';
+import 'package:public_api_app/src/components/covid_bar_chart.dart';
 import 'package:public_api_app/src/controllers/covid_statistics_controller.dart';
 
 class App extends GetView<CovidStatisticsController> {
@@ -36,8 +37,8 @@ class App extends GetView<CovidStatisticsController> {
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
             colors: [
-              Color(0xff5499a8),
-              Color(0xff3c727c),
+              ColorConstant.deepBackgroundColor,
+              ColorConstant.lightBackgroundColor,
             ],
           ),
         ),
@@ -61,13 +62,13 @@ class App extends GetView<CovidStatisticsController> {
             padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Color(0xff2e5963),
+              color: ColorConstant.deepBackgroundColor,
             ),
             child: Obx(
               () => Text(
                 controller.todayData.standardDayString,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -108,7 +109,7 @@ class App extends GetView<CovidStatisticsController> {
           const SizedBox(
             height: 60,
             child: VerticalDivider(
-              color: Color(0xffc7c7c7),
+              color: ColorConstant.lightGeryColor,
             ),
           ),
           Expanded(
@@ -130,7 +131,7 @@ class App extends GetView<CovidStatisticsController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
+        const Text(
           "확진자 추이",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
